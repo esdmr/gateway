@@ -1,0 +1,5 @@
+*.pem
+*.log
+key.txt
+*.key.txt
+get-ip.expect.tcl
