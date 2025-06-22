@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+  external_labels:
+    monitor: "gateway"
+
+scrape_configs:
+  - job_name: "nginx"
+    static_configs:
+      - targets:
+          - "nginx-prometheus:9113"
+  - job_name: "anubis"
+    static_configs:
+      - targets:
+          - "anubis:9090"

@@ -1,0 +1,115 @@
+services:
+  grafana:
+    image: grafana/grafana-oss
+    scale: 1
+    deploy:
+      mode: global
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: grafana-storage
+        target: /var/lib/grafana
+    ports:
+      - name: grafana_http
+        protocol: tcp
+        app_protocol: http
+        published: 3000
+        target: 3000
+    networks:
+      gateway-metric:
+      gateway-monitor:
+
+  prometheus:
+    image: prom/prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+    volumes:
+      - type: bind
+        source: prometheus
+        target: /etc/prometheus
+        read_only: true
+      - type: volume
+        source: prometheus-data
+        target: /prometheus
+    expose:
+      - 9090
+    depends_on:
+      - anubis
+    networks:
+      gateway-metric:
+
+  anubis:
+    build: anubis
+    restart: unless-stopped
+    environment:
+      SERVE_ROBOTS_TXT: "true"
+      TARGET: http://nginx:8080
+      POLICY_FNAME: /data/cfg/botPolicy.yaml
+      OG_PASSTHROUGH: "true"
+      OG_EXPIRY_TIME: 24h
+    volumes:
+      - type: bind
+        source: anubis
+        target: /data/cfg
+        read_only: true
+    expose:
+      - 8923
+      - 9090
+    networks:
+      gateway-public:
+      gateway-metric:
+
+  nginx-prometheus:
+    image: nginx/nginx-prometheus-exporter
+    restart: unless-stopped
+    command:
+      - "--nginx.scrape-uri=http://nginx:9090"
+    expose:
+      - 9113
+    networks:
+      gateway-metric:
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: nginx
+        target: /etc/nginx/conf.d
+        read_only: true
+      - type: bind
+        source: tls/server
+        target: /etc/nginx/tls
+        read_only: true
+      - type: bind
+        source: public
+        target: /var/www
+        read_only: true
+    ports:
+      - name: gateway_https
+        protocol: tcp
+        app_protocol: https
+        published: 9443
+        target: 443
+    expose:
+      - 8080
+      - 9090
+    networks:
+      gateway-public:
+      gateway-metric:
+
+networks:
+  gateway-public:
+    name: gateway-public
+  gateway-metric:
+    name: gateway-metric
+    internal: true
+  gateway-monitor:
+
+volumes:
+  grafana-storage:
+  prometheus-data:

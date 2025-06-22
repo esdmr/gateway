@@ -1,1 +1,1 @@
-subjectAltName=DNS:esdmr.iddns.ir,IP:151.235.212.102
+subjectAltName=DNS:esdmr.iddns.ir,DNS:localhost,IP:127.0.0.1,IP:192.168.1.2,IP:151.235.246.229

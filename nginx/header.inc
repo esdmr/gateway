@@ -1,0 +1,2 @@
+server_tokens off;
+add_header X-Content-Type-Options nosniff;

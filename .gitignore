@@ -3,3 +3,5 @@
 key.txt
 *.key.txt
 get-ip.expect.tcl
+/anubis/anubis-*.gz
+/anubis/anubis-*/
