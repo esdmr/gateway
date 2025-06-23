@@ -14,6 +14,8 @@ ip="$(expect -c "
 	interact
 " | grep -o -P '(?<=inet addr:)(?!192|127)\d+\.\d+\.\d+\.\d+')"
 
-printf 'subjectAltName=DNS:esdmr.iddns.ir,DNS:localhost,IP:127.0.0.1,IP:192.168.1.2,IP:%s' "$ip" >tls/server/ext.cnf
+domain=esdmr.iddns.ir
 
-printf 'server_name esdmr.iddns.ir localhost 127.0.0.1 192.168.1.2 %s "";\n' "$ip" >nginx/name.inc
+printf 'subjectAltName=DNS:%s,DNS:localhost,IP:127.0.0.1,IP:192.168.1.2,IP:%s' "$domain" "$ip" >tls/server/ext.cnf
+
+printf 'server_name %s localhost 127.0.0.1 192.168.1.2 %s "";\n' "$domain" "$ip" >nginx/name.inc
