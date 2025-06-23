@@ -1,6 +1,7 @@
 *.pem
 *.log
 *.cnf
+*.srl
 key.txt
 *.key.txt
 get-ip.expect.tcl
