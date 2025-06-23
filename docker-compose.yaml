@@ -13,7 +13,7 @@ services:
       - name: grafana_http
         protocol: tcp
         app_protocol: http
-        published: 3000
+        published: 4000
         target: 3000
     networks:
       gateway-metric:
