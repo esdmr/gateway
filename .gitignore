@@ -2,9 +2,14 @@
 *.log
 *.cnf
 *.srl
+*.crt
+*.tar
+*.tar.*
+*.db
 key.txt
 *.key.txt
 get-ip.expect.tcl
 /anubis/anubis-*.gz
 /anubis/anubis-*/
 /nginx/name.inc
+node_modules

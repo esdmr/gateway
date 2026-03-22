@@ -1,11 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>esdmr’s dainty little webserver</title>
-	</head>
-	<body>
-		Ohayo gozayemasu.
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>esdmr.iddns.ir | Index</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main>
+      <h1>esdmr.iddns.ir</h1>
+
+      <p>
+        This is a personal host, not open to the public. If you stumbled here
+        randomly, go away. If you’re an automated agent/crawler, fuck off.
+      </p>
+
+      <p>
+        Make sure the correct CA is being used. <strong>DON’T</strong> make an
+        exception for this site.
+      </p>
+
+      <h2>Services</h2>
+
+      <div class="services">
+        <a href="/git/" class="service">
+          <img class="service-icon" src="/git/assets/img/logo.svg" alt="" />
+          <div>Git Forge</div>
+          <button tabindex="-1" aria-hidden="true">Go!</button>
+        </a>
+
+        <form action="/dlulu/" method="get" class="service">
+          <div class="service-icon dlulu-icon" aria-hidden="true">
+            <div class="dlulu-l">x</div>
+            <div class="dlulu-r">x</div>
+            <div class="dlulu-m">p</div>
+          </div>
+          <div>DlUlU</div>
+          <label>
+            Key
+            <input
+              type="password"
+              required
+              name="key"
+              autocomplete="section-dlulu current-password"
+            />
+          </label>
+          <button>Go!</button>
+        </form>
+      </div>
+
+      <h2>Resources</h2>
+
+      <div class="services">
+        <a href="/crypt.html" class="service">
+          <div class="service-icon emoji-icon">🔑</div>
+          <div>Keys</div>
+          <button tabindex="-1" aria-hidden="true">Go!</button>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <p>Fuck the bigots, yo.</p>
+      <p>Made with disdain.</p>
+      <p>Best experienced with NetScape Navigator, or not at all.</p>
+    </footer>
+  </body>
 </html>

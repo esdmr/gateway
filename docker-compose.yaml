@@ -76,6 +76,9 @@ services:
   nginx:
     image: nginx
     restart: unless-stopped
+    dns:
+      - "1.1.1.1"
+      - "1.0.0.1"
     volumes:
       - type: bind
         source: nginx
@@ -93,18 +96,23 @@ services:
       - name: gateway_https
         protocol: tcp
         app_protocol: https
-        published: 9443
+        published: 12345
         target: 443
     expose:
       - 8080
       - 9090
     networks:
       gateway-public:
+        ipv4_address: 172.172.172.172
       gateway-metric:
 
 networks:
   gateway-public:
     name: gateway-public
+    ipam:
+      config:
+        - subnet: 172.172.172.0/24
+          gateway: 172.172.172.1
   gateway-metric:
     name: gateway-metric
     internal: true

@@ -12,9 +12,7 @@
 
 bots:
   # Pathological bots to deny
-  - # This correlates to data/bots/deny-pathological.yaml in the source tree
-    # https://github.com/TecharoHQ/anubis/blob/main/data/bots/deny-pathological.yaml
-    import: (data)/bots/_deny-pathological.yaml
+  - import: (data)/bots/_deny-pathological.yaml
   - import: (data)/bots/aggressive-brazilian-scrapers.yaml
 
   # Aggressively block AI/LLM related bots/agents by default
@@ -23,14 +21,57 @@ bots:
   # Challenge Firefox AI previews
   - import: (data)/clients/x-firefox-ai.yaml
 
+  # Prevent empty user-agent.
+  - import: (data)/common/rfc-violations.yaml
+
   # Allow common "keeping the internet working" routes (well-known, favicon, robots.txt)
   - import: (data)/common/keep-internet-working.yaml
+
+  # Git client for Gitea
+  - name: allow-git-clients
+    action: ALLOW
+    expression:
+      all:
+      - >
+        (  
+          userAgent.startsWith("git/") ||
+          userAgent.startsWith("git-lfs/") ||
+          userAgent.contains("libgit") ||
+          userAgent.startsWith("go-git") ||
+          userAgent.startsWith("JGit/") ||
+          userAgent.startsWith("JGit-")
+        )
+      # - '"Git-Protocol" in headers'
+      # - headers["Git-Protocol"] == "version=2"
+
+  # Gitea Atom/RSS feeds
+  - name: gitea-feed-atom
+    action: ALLOW
+    path_regex: ^/git/[.A-Za-z0-9_-]{1,256}?[./A-Za-z0-9_-]*\.atom$
+  - name: gitea-feed-rss
+    action: ALLOW
+    path_regex: ^/git/[.A-Za-z0-9_-]{1,256}?[./A-Za-z0-9_-]*\.rss$
+
+  # Gitea API Routes
+  - name: gitea-allow-api-routes
+    action: ALLOW
+    expression:
+      all:
+        - '"Accept" in headers'
+        - 'headers["Accept"] == "application/json"'
+        - path.startsWith("/git/api/")
 
   # Generic catchall rule
   - name: generic-browser
     user_agent_regex: >-
       Mozilla|Opera
     action: CHALLENGE
+
+  # Don't allow stuff by default!
+  - name: default-deny
+    user_agent_regex: .*
+    action: DENY
+
 
 dnsbl: false
 

@@ -1,0 +1,196 @@
+body {
+  --bg: #002;
+  --fg: #ffc;
+
+  color-scheme: dark;
+  font-family:
+    "Departure Mono", "JetBrains Mono", "Fira Code", "Ubuntu Mono", "Noto Mono",
+    "Vazir Code", "Liberation Mono", "FreeMono", "Courier New", Courier,
+    monospace;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  background-color: var(--bg);
+  color: var(--fg);
+  caret-color: var(--fg);
+  accent-color: var(--fg);
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background-color: var(--fg);
+  color: var(--bg);
+}
+
+main {
+  padding: 10vh 10vw;
+}
+
+h1 {
+  text-align: center;
+  margin-block: 0 2em;
+}
+
+strong {
+  --fg: #fcc;
+}
+
+p,
+pre {
+  --fg: #dda;
+}
+
+p strong {
+  --fg: #daa;
+}
+
+.services {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.service {
+  --bg: #001;
+  text-decoration: none;
+  border: 2px solid var(--fg);
+  border-radius: 30px;
+  padding: 30px;
+
+  width: 241px;
+  height: 261px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+  gap: 1em;
+}
+
+a.service:hover,
+a.service:focus-visible,
+button.service:hover,
+button.service:focus-visible {
+  --bg: #112;
+  outline-offset: 1px;
+}
+
+a.service:active,
+button.service:active {
+  --bg: #223;
+}
+
+.service-icon {
+  --bg: transparent;
+
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+img {
+  filter: sepia(1);
+}
+
+.dlulu-icon {
+  position: relative;
+  font-size: 2em;
+}
+
+.dlulu-l {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dlulu-r {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.dlulu-m {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-25%) rotate(90deg);
+}
+
+.emoji-icon {
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  filter: sepia(1);
+}
+
+label:has(input) {
+  display: flex;
+  gap: 1ch;
+}
+
+input {
+  width: 16ch;
+  background-color: revert;
+  flex: 1 1;
+}
+
+.service button {
+  --bg: transparent;
+
+  font-weight: bold;
+  border: 2px solid var(--fg);
+  border-radius: 45px;
+  padding: 10px 45px;
+
+  cursor: pointer;
+}
+
+:not(a, button).service button:hover,
+:not(a, button).service button:focus-visible {
+  --bg: #223;
+  outline-offset: 1px;
+}
+
+:not(a, button).service button:active {
+  --bg: #445;
+}
+
+footer {
+  --bg: #001;
+  border-top: 4px solid var(--fg);
+  padding: 10px 30px;
+  bottom: 0;
+  position: relative;
+}
+
+.copy {
+  --bg: transparent;
+
+  font-weight: bold;
+  border: 2px solid var(--fg);
+  border-radius: 45px;
+  padding: 10px 45px;
+
+  cursor: pointer;
+}
+
+.copy:hover,
+.copy:focus-visible {
+  --bg: #223;
+  outline-offset: 1px;
+}
+
+.copy:active {
+  --bg: #445;
+}
+
+pre {
+  overflow-x: auto;
+}
