@@ -1,9 +1,12 @@
 import { readableStreamToFormData } from "bun";
-import { createReadStream } from "node:fs";
+import { createReadStream, readFileSync } from "node:fs";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { createServer, IncomingMessage, ServerResponse } from "node:http";
 
-const secKey = process.env.SECKEY;
+const secKey = process.env.SECKEY_FILE
+  ? readFileSync(process.env.SECKEY_FILE, "utf8").trim()
+  : process.env.SECKEY;
+
 if (!secKey) throw new Error("Missing sec key");
 
 /** @type {import('node:fs').Dirent[]} */

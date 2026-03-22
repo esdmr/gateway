@@ -106,6 +106,29 @@ services:
         ipv4_address: 172.172.172.172
       gateway-metric:
 
+  dlulu:
+    build:
+      context: dlulu
+    environment:
+      SECKEY_FILE: /home/bun/seckey
+      BASEURL: /dlulu
+    expose:
+      - 9075
+    networks:
+      gateway-public:
+    volumes:
+      - type: bind
+        source: dlulu/ul
+        target: /home/bun/app/ul
+      - type: bind
+        source: dlulu/dl
+        target: /home/bun/app/dl
+        read_only: true
+      - type: bind
+        source: dlulu.key.txt
+        target: /home/bun/seckey
+        read_only: true
+
 networks:
   gateway-public:
     name: gateway-public
