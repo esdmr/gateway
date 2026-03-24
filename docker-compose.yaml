@@ -129,6 +129,27 @@ services:
         target: /home/bun/seckey
         read_only: true
 
+  bored:
+    build:
+      context: bored
+    environment:
+      SECKEY_FILE: /app/seckey
+      ADMINKEY_FILE: /app/adminkey
+      BASEURL: /bored
+    expose:
+      - 8510
+    networks:
+      gateway-public:
+    volumes:
+      - type: bind
+        source: bored-sec.key.txt
+        target: /app/seckey
+        read_only: true
+      - type: bind
+        source: bored-admin.key.txt
+        target: /app/adminkey
+        read_only: true
+
 networks:
   gateway-public:
     name: gateway-public

@@ -18,6 +18,8 @@ body {
   accent-color: var(--fg);
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
+  text-decoration-color: color-mix(in oklab, var(--fg) 75%, var(--bg) 25%);
+  text-decoration-thickness: 0.1667ex;
 }
 
 ::selection {
@@ -34,8 +36,13 @@ h1 {
   margin-block: 0 2em;
 }
 
-strong {
+strong,
+del {
   --fg: #fcc;
+}
+
+ins {
+  --fg: #cfc;
 }
 
 p,
@@ -43,8 +50,13 @@ pre {
   --fg: #dda;
 }
 
-p strong {
+p strong,
+p del {
   --fg: #daa;
+}
+
+p ins {
+  --fg: #ada;
 }
 
 .services {
@@ -130,15 +142,22 @@ img {
   filter: sepia(1);
 }
 
-label:has(input) {
+label:has(input, select, textarea) {
   display: flex;
   gap: 1ch;
 }
 
-input {
+input,
+select,
+textarea {
   width: 16ch;
   background-color: revert;
   flex: 1 1;
+}
+
+[type="checkbox"] {
+  width: max-content;
+  flex: 0 0;
 }
 
 .service button {
@@ -162,12 +181,18 @@ input {
   --bg: #445;
 }
 
+header,
 footer {
   --bg: #001;
-  border-top: 4px solid var(--fg);
   padding: 10px 30px;
-  bottom: 0;
-  position: relative;
+}
+
+header {
+  border-bottom: 4px solid var(--fg);
+}
+
+footer {
+  border-top: 4px solid var(--fg);
 }
 
 .copy {
