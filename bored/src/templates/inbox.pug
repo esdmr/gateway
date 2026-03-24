@@ -1,0 +1,11 @@
+extends _layout
+
+block title
+	| Inbox | Bored
+
+block main
+	h1 Inbox
+
+	a(href=root + 'admin') Go back.
+
+	+message-container(messages)

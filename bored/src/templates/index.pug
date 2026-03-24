@@ -1,0 +1,30 @@
+extends _layout.pug
+
+block main
+	h1 msg #[del BOARD] #[ins BORED]
+
+	+message-container(messages)
+		h2 Compose
+		form(action=root + "compose" method="post")
+			+csrf
+			+field("Author")
+				input(name="author" required)
+			+field("Message")
+				input(name="body" required)
+			+field("Privacy")
+				select(name="privacy" required)
+					option(value="0") Public
+					option(value="1") Anonymous
+					option(value="2") Private
+			button.outline Submit
+
+	if admin
+		a.admin(href=root + "admin") Admin
+	else
+		details.admin
+			summary Admin
+			form(action=root + "login" method="post")
+				+csrf
+				+field("Key")
+					input(name="key" type="password" autocomplete="current-password" required)
+				button.outline Login

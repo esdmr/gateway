@@ -1,0 +1,58 @@
+extends _layout
+
+mixin wanted-name(i)
+	case i
+		when WantedBy.enum.AUTHOR
+			| Author
+		when WantedBy.enum.REMOTE_ADDRESS
+			| Remote Address
+		when WantedBy.enum.USER_AGENT
+			| User Agent
+
+mixin wanted-behavior(i)
+	case i
+		when Behavior.enum.BLOCK
+			| Block
+		when Behavior.enum.QUARANTINE
+			| Quarantine
+
+mixin wanted(i)
+	.wanted
+		.wanted_name
+			+wanted-name(i.name)
+		.wanted_value= i.value
+		.wanted_behavior
+			+wanted-behavior(i.behavior)
+		.wanted_count= i.trigger_count
+		.wanted_time= timestampToString(i.created_at)
+		.wanted_admin
+			+action(root + "admin/unblock")(return=path wid=i.rowid) Unblock
+
+mixin wanted-container(wanted, title="Wanted")
+	section.wanted-container
+		header
+			h2= title
+
+		.wanted-list
+			- var empty = true;
+
+			- for (const i of wanted)
+				- empty = false;
+				+wanted(i)
+
+			if empty
+				p The city #[strong is] big enough for all of us!
+
+		if block
+			footer
+				block
+
+block title
+	| Wanted | Bored
+
+block main
+	h1 Wanted
+
+	a(href=root + 'admin') Go back.
+
+	+wanted-container(wanted)

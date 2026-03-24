@@ -1,0 +1,36 @@
+extends _layout.pug
+
+block title
+	| Block | Bored
+
+block main
+	h1 Block
+
+	if message
+		.messages
+			+message(message)
+
+	form(target=root + 'admin/block' method="post")
+		+csrf
+		input(type="hidden" name="return" value=returnPath || path)
+		+field("Behavior")
+			select(name="behavior")
+				option(value=Behavior.enum.BLOCK) Block
+				option(value=Behavior.enum.QUARANTINE) Quarantine
+
+		if message
+			+rfield("Author: " + message.author + (message.is_redacted ? ' (might’ve been redacted.)' : ''))
+				input(type="checkbox" name="author" value=message.author)
+			+rfield("Remote Address: " + message.remote_address)
+				input(type="checkbox" name="remote_address" value=message.remote_address)
+			+rfield("User Agent: " + message.user_agent)
+				input(type="checkbox" name="user_agent" value=message.user_agent)
+		else
+			+field("Author")
+				input(name="author")
+			+field("Remote Address")
+				input(name="remote_address")
+			+field("User Agent")
+				input(name="user_agent")
+
+		button.outline Submit

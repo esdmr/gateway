@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "NodeNext",
+		"checkJs": true,
+		"strict": true,
+		"noEmit": true,
+		"erasableSyntaxOnly": true,
+		"verbatimModuleSyntax": true,
+		"incremental": true,
+		"allowImportingTsExtensions": true,
+		"allowArbitraryExtensions": true,
+	}
+}

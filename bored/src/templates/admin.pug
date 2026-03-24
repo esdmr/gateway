@@ -1,0 +1,14 @@
+extends _layout
+
+block title
+	| Admin | Bored
+
+block main
+	h1 Admin
+
+	nav
+		ul
+			li: a(href=root) Go back.
+			li: a(href=root + 'admin/inbox') Inbox
+			li: a(href=root + 'admin/spam') Spam
+			li: a(href=root + 'admin/wanted') Wanted

@@ -1,0 +1,186 @@
+.icon-defs {
+  display: none;
+}
+
+.notifications {
+  --bg: #ffc;
+  --fg: #002;
+}
+
+.notification {
+  padding: 2ch;
+  border-bottom: 2px solid var(--fg);
+  position: relative;
+}
+
+.notification p {
+  --fg: inherit;
+  margin: 0;
+  margin-right: 24px;
+}
+
+.notification_close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  position: absolute;
+  top: 2ch;
+  right: 2ch;
+}
+
+@media not (scripting: enabled) {
+  .notification_close {
+    display: none;
+  }
+}
+
+.messages-container {
+  --bg: #001;
+  border-radius: 1em;
+  overflow: hidden;
+  position: relative;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3ch;
+  gap: 2ch;
+}
+
+.message {
+  --bg: transparent;
+  display: grid;
+  grid-template-rows: 32px 1fr;
+  grid-template-columns: 32px 1fr max-content;
+  gap: 8px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.message_background {
+  --bg: #335;
+  grid-row: 1 / span 2;
+  grid-column: 2 / span 2;
+  border-radius: 12px;
+  border-top-left-radius: 0;
+}
+
+.message_avatarBackground {
+  --bg: var(--fg);
+  grid-row: 1;
+  grid-column: 1;
+  border-radius: 4px;
+}
+
+.message_avatar {
+  --fg: #001;
+  grid-row: 1;
+  grid-column: 1;
+  padding: 4px;
+}
+
+.message_author {
+  grid-row: 1;
+  grid-column: 2;
+  padding: 8px;
+  font-weight: bold;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message_redacted {
+  --fg: #daa;
+  grid-row: 1;
+  grid-column: 3;
+  padding: 8px;
+  justify-self: end;
+}
+
+.message_body {
+  grid-row: 2;
+  grid-column: 2;
+  padding: 8px;
+  margin: 0;
+
+  word-break: break-all;
+}
+
+.message_time {
+  --fg: #aaa;
+  grid-row: 2;
+  grid-column: 3;
+  padding: 8px;
+  justify-self: end;
+  align-self: end;
+}
+
+.message_admin {
+  grid-row: 3;
+  grid-column: 2 / span 2;
+  padding: 4px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+label {
+  margin-block: 2ch;
+}
+
+.outline {
+  --bg: transparent;
+
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid var(--fg);
+  border-radius: 45px;
+  padding: 10px 45px;
+
+  cursor: pointer;
+}
+
+.outline:hover,
+.outline:focus-visible {
+  --bg: #223;
+  outline-offset: 1px;
+}
+
+.outline:active {
+  --bg: #445;
+}
+
+.action {
+  padding: 10px;
+  font-weight: normal;
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.\:3 {
+  vertical-align: 0.85px;
+}
+
+.admin {
+  margin-top: 32px;
+  display: inline-block;
+}
+
+.wanted-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wanted {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}

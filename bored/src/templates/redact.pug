@@ -1,0 +1,20 @@
+extends _layout.pug
+
+block title
+	| Redact | Bored
+
+block main
+	h1 Redact
+
+	.messages
+		+message(message)
+
+	form(target=root + 'admin/redact' method="post")
+		+csrf
+		input(type="hidden" name="return" value=returnPath || path)
+		input(type="hidden" name="mid" value=message.rowid)
+		+field("Author")
+			input(name="author" value=message.author required)
+		+field("Message")
+			input(name="body" value=message.body required)
+		button.outline Submit
