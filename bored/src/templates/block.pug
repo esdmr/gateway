@@ -12,7 +12,7 @@ block main
 		.messages
 			+message(message)
 
-	form(target=BASEURL + 'admin/block' method="post")
+	form(action=BASEURL + 'admin/block' method="post")
 		+csrf
 		input(type="hidden" name="return" value=returnPath || path)
 		+field("Behavior")

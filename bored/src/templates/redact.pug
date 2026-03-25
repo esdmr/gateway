@@ -11,7 +11,7 @@ block main
 	.messages
 		+message(message)
 
-	form(target=BASEURL + 'admin/redact' method="post")
+	form(action=BASEURL + 'admin/redact' method="post")
 		+csrf
 		input(type="hidden" name="return" value=returnPath || path)
 		input(type="hidden" name="mid" value=message.rowid)
