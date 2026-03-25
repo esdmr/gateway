@@ -26,7 +26,7 @@ mixin wanted(i)
 		.wanted_count= i.trigger_count
 		.wanted_time= timestampToString(i.created_at)
 		.wanted_admin
-			+action(root + "admin/unblock")(return=path wid=i.rowid) Unblock
+			+action(BASEURL + "admin/unblock")(return=path wid=i.rowid) Unblock
 
 mixin wanted-container(wanted, title="Wanted")
 	section.wanted-container
@@ -53,6 +53,6 @@ block title
 block main
 	h1 Wanted
 
-	a(href=root + 'admin') Go back.
+	a(href=BASEURL + 'admin') Go back.
 
 	+wanted-container(wanted)

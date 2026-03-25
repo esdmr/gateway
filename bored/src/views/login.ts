@@ -1,7 +1,4 @@
 import Router from "@koa/router";
-import * as v from 'valibot';
-
-const DEV = process.env.NODE_ENV === "development";
 
 export default new Router().post("/", async (ctx) => {
   let body = ctx.request.body as Record<string, any> | null | undefined;
@@ -23,5 +20,5 @@ export default new Router().post("/", async (ctx) => {
   }
 
   ctx.session.admin = true;
-  ctx.redirect(DEV ? "/" : "/bored/");
+  ctx.redirect(ctx.BASEURL);
 });

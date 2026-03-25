@@ -57,12 +57,12 @@ mixin message(i)
 		if admin
 			.message_admin
 				if i.directory !== Directory.enum.SPAM
-					+action(root + 'admin/move')(return=path mid=i.rowid dir=Directory.enum.SPAM) Mark as Spam
+					+action(BASEURL + 'admin/move')(return=path mid=i.rowid dir=Directory.enum.SPAM) Mark as Spam
 				if i.directory !== Directory.enum.BORED && i.privacy < Privacy.enum.PRIVATE
-					+action(root + 'admin/move')(return=path mid=i.rowid dir=Directory.enum.BORED) Approve
-				+action(root + 'admin/delete')(return=path mid=i.rowid) Delete
-				+action(root + 'admin/redact', 'get')(return=path mid=i.rowid) Redact
-				+action(root + 'admin/block', 'get')(return=path mid=i.rowid) Block
+					+action(BASEURL + 'admin/move')(return=path mid=i.rowid dir=Directory.enum.BORED) Approve
+				+action(BASEURL + 'admin/delete')(return=path mid=i.rowid) Delete
+				+action(BASEURL + 'admin/redact', 'get')(return=path mid=i.rowid) Redact
+				+action(BASEURL + 'admin/block', 'get')(return=path mid=i.rowid) Block
 
 
 mixin message-container(messages, title="Messages")
@@ -97,9 +97,9 @@ html(lang="en")
 			block title
 				| Bored
 		link(rel="stylesheet" href="/index.css")
-		link(rel="stylesheet" href="/bored/assets/index.css")
+		link(rel="stylesheet" href=BASEURL + "assets/index.css")
 		if notifications.length > 0
-			script(defer async src="/bored/assets/notification-close.js")
+			script(defer async src=BASEURL + "assets/notification-close.js")
 	body
 		include _icon-defs.svg
 

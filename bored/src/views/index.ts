@@ -28,8 +28,6 @@ export default new Router()
     });
   })
   .use("/assets", assets.routes())
-  // For development:
-  .use("/bored/assets", assets.routes())
   .use("/compose", compose.routes())
   .use("/login", login.routes())
   .use(

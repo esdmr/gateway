@@ -6,8 +6,6 @@ import {
   type Privacy,
 } from "../models/messages.ts";
 
-export const DEV = process.env.NODE_ENV === "development";
-
 export default new Router().post("/", async (ctx) => {
   let body = ctx.request.body as Record<string, any> | null | undefined;
 
@@ -36,5 +34,5 @@ export default new Router().post("/", async (ctx) => {
       ? "Successfully drafted a message. It will be shown after a moderator approves it."
       : "You aren’t allowed to draft messages. Please go away.",
   );
-  ctx.redirect(DEV ? "/" : "/bored/");
+  ctx.redirect(ctx.BASEURL);
 });

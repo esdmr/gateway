@@ -2,7 +2,6 @@ import Router from "@koa/router";
 import * as v from "valibot";
 import { getMessage } from "../../models/messages.ts";
 import { Behavior, insertWanted, WantedBy } from "../../models/wanted.ts";
-import { DEV } from "../compose.ts";
 
 const plural = new Intl.PluralRules("en");
 
@@ -54,5 +53,5 @@ export default new Router()
     ctx.sendNotification(
       `Added ${n} ${plural.select(n) === "one" ? "item" : "items"} to the wanted list.`,
     );
-    ctx.redirect(body.return || (DEV ? "/admin" : "/bored/admin"));
+    ctx.redirect(body.return || ctx.BASEURL + "admin");
   });

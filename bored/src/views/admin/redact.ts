@@ -1,6 +1,5 @@
 import Router from "@koa/router";
 import { getMessage, redactMessage } from "../../models/messages.ts";
-import { DEV } from "../compose.ts";
 
 export default new Router()
   .get("/", (ctx) => {
@@ -37,5 +36,5 @@ export default new Router()
     }
 
     ctx.sendNotification("Successfully redacted a message.");
-    ctx.redirect(body.return || (DEV ? "/admin" : "/bored/admin"));
+    ctx.redirect(body.return || ctx.BASEURL + "admin");
   });

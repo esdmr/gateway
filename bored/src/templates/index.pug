@@ -5,7 +5,7 @@ block main
 
 	+message-container(messages)
 		h2 Compose
-		form(action=root + "compose" method="post")
+		form(action=BASEURL + "compose" method="post")
 			+csrf
 			+field("Author")
 				input(name="author" required)
@@ -19,11 +19,11 @@ block main
 			button.outline Submit
 
 	if admin
-		a.admin(href=root + "admin") Admin
+		a.admin(href=BASEURL + "admin") Admin
 	else
 		details.admin
 			summary Admin
-			form(action=root + "login" method="post")
+			form(action=BASEURL + "login" method="post")
 				+csrf
 				+field("Key")
 					input(name="key" type="password" autocomplete="current-password" required)

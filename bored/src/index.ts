@@ -1,4 +1,3 @@
-import {timingSafeEqual} from 'node:crypto';
 import accessLog from "@koa/access-log";
 import bodyParser from "@koa/bodyparser";
 import { send } from "@koa/send";
@@ -7,6 +6,7 @@ import csrf from "koa-csrf";
 import helmet from "koa-helmet";
 import KoaPug from "koa-pug";
 import session from "koa-session-jwt/es/index.js";
+import { timingSafeEqual } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { Directory, Privacy } from "./models/messages.ts";
@@ -20,6 +20,12 @@ import {
 import views from "./views/index.ts";
 
 const DEV = process.env.NODE_ENV === "development";
+
+const BASEURL = DEV
+  ? "/"
+  : process.env.BASEURL?.endsWith("/")
+    ? process.env.BASEURL
+    : (process.env.BASEURL ?? "") + "/";
 
 const secKey = process.env.SECKEY_FILE
   ? readFileSync(process.env.SECKEY_FILE, "utf8").trim()
@@ -41,7 +47,7 @@ new KoaPug.default({
   viewPath: fileURLToPath(new URL("templates", import.meta.url)),
   locals: {
     DEV,
-    root: DEV ? "/" : "/bored/",
+    BASEURL,
     Directory,
     Privacy,
     WantedBy,
@@ -55,6 +61,8 @@ new KoaPug.default({
 
 declare module "koa" {
   interface BaseContext {
+    DEV: boolean;
+    BASEURL: string;
     checkAdminKey(key: string): boolean;
     getNotifications(): string[];
     sendNotification(message: string): boolean;
@@ -76,9 +84,8 @@ app.context.getNotifications = function () {
   if (!this.session) return [];
   const notifications = this.session.notifications;
   delete this.session.notifications;
-  return Array.isArray(notifications) &&
-    notifications.every((i) => typeof i === "string")
-    ? (notifications as string[])
+  return Array.isArray(notifications)
+    ? notifications.filter((i) => typeof i === "string")
     : [];
 };
 
@@ -93,6 +100,9 @@ app.context.sendNotification = function (message: string) {
 
   return true;
 };
+
+app.context.DEV = DEV;
+app.context.BASEURL = BASEURL;
 
 app
   .use(accessLog())
@@ -110,7 +120,8 @@ app
   .use((ctx, next) => {
     ctx.state.getNotifications = () => ctx.getNotifications();
     ctx.state.admin = Boolean(ctx.session?.admin);
-    ctx.state.path = ctx.path;
+    ctx.state.path =
+      BASEURL + (ctx.path.startsWith("/") ? ctx.path.slice(1) : ctx.path);
     return next();
   })
   .use(

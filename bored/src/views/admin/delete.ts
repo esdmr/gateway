@@ -1,6 +1,5 @@
 import Router from "@koa/router";
 import { deleteMessage } from "../../models/messages.ts";
-import { DEV } from "../compose.ts";
 
 export default new Router().post("/", (ctx) => {
   let body = ctx.request.body as Record<string, any> | null | undefined;
@@ -20,5 +19,5 @@ export default new Router().post("/", (ctx) => {
   }
 
   ctx.sendNotification("Successfully deleted a message.");
-  ctx.redirect(body.return || (DEV ? "/admin" : "/bored/admin"));
+  ctx.redirect(body.return || ctx.BASEURL + "admin");
 });

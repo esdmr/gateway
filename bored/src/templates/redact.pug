@@ -6,10 +6,12 @@ block title
 block main
 	h1 Redact
 
+	a(href=returnPath || (BASEURL + 'admin')) Go back.
+
 	.messages
 		+message(message)
 
-	form(target=root + 'admin/redact' method="post")
+	form(target=BASEURL + 'admin/redact' method="post")
 		+csrf
 		input(type="hidden" name="return" value=returnPath || path)
 		input(type="hidden" name="mid" value=message.rowid)
