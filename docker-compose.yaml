@@ -136,11 +136,15 @@ services:
       SECKEY_FILE: /app/seckey
       ADMINKEY_FILE: /app/adminkey
       BASEURL: /bored
+      DB_PATH: /data/bored.db
     expose:
       - 8510
     networks:
       gateway-public:
     volumes:
+      - type: volume
+        source: bored-data
+        target: /data
       - type: bind
         source: bored-sec.key.txt
         target: /app/seckey
@@ -165,3 +169,4 @@ networks:
 volumes:
   grafana-storage:
   prometheus-data:
+  bored-data:
