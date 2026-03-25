@@ -153,6 +153,7 @@ textarea {
   width: 16ch;
   background-color: revert;
   flex: 1 1;
+  resize: block;
 }
 
 [type="checkbox"] {

@@ -16,5 +16,5 @@ block main
 		+field("Author")
 			input(name="author" value=message.author required)
 		+field("Message")
-			input(name="body" value=message.body required)
+			textarea(name="body" required)= message.body
 		button.outline Submit
