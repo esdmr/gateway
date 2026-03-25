@@ -15,7 +15,7 @@ export default new Router().post("/", async (ctx) => {
 
   const message = v.safeParse(MessageInit, {
     author: body.author,
-    remote_address: ctx.request.socket.remoteAddress || "0.0.0.0",
+    remote_address: ctx.get('X-Forwarded-For') || ctx.request.socket.remoteAddress || "0.0.0.0",
     user_agent: ctx.request.headers["user-agent"] || "Empty",
     body: body.body,
     privacy: Number(body.privacy) as Privacy,
