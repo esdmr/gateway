@@ -24,7 +24,8 @@ mixin colon-three(text)
 mixin notification(i)
 	.notification
 		p= i
-		button.notification_close(aria-label="Close Notification" title="Close")
+		label.notification_close(aria-label="Close Notification" title="Close")
+			input.notification_state(type="checkbox" autocomplete="off")
 			svg(viewBox="0 0 24 24" aria-hidden="true")
 				use(href="#icon-x")
 
@@ -98,13 +99,11 @@ html(lang="en")
 				| Bored
 		link(rel="stylesheet" href="/index.css")
 		link(rel="stylesheet" href=BASEURL + "assets/index.css")
-		if notifications.length > 0
-			script(defer async src=BASEURL + "assets/notification-close.js")
 	body
 		include _icon-defs.svg
 
 		if notifications.length > 0
-			aside.notifications
+			aside.notifications(aria-label="Notifications")
 				- for (const i of notifications)
 					+notification(i)
 
