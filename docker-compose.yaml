@@ -133,8 +133,8 @@ services:
     build:
       context: bored
     environment:
-      SECKEY_FILE: /app/seckey
-      ADMINKEY_FILE: /app/adminkey
+      SECKEY_FILE: /data/seckey
+      ADMINKEY_FILE: /data/adminkey
       BASEURL: /bored
       DB_PATH: /data/bored.db
     expose:
@@ -147,11 +147,11 @@ services:
         target: /data
       - type: bind
         source: bored-sec.key.txt
-        target: /app/seckey
+        target: /data/seckey
         read_only: true
       - type: bind
         source: bored-admin.key.txt
-        target: /app/adminkey
+        target: /data/adminkey
         read_only: true
 
 networks:
