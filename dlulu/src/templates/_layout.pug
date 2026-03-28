@@ -1,0 +1,70 @@
+mixin csrf()
+	input(type="hidden" name="_csrf" value=_csrf)
+
+mixin field(label)
+	label
+		= label
+		|
+		block
+
+mixin rfield(label)
+	label
+		block
+		|
+		= label
+
+mixin colon-three(text)
+	- for (const [index, i] of text.split(":3").entries())
+		if index > 0
+			span(class=":3") :
+			| 3
+		= i
+
+
+mixin notification(i)
+	.notification
+		p= i
+		label.notification_close(aria-label="Close Notification" title="Close")
+			input.notification_state(type="checkbox" autocomplete="off")
+			svg(viewBox="0 0 24 24" aria-hidden="true")
+				use(href="#icon-x")
+
+
+mixin action(href, method="post")
+	form(action=href method=method)
+		if method !== "get"
+			+csrf
+		- for (const [k, v] of Object.entries(attributes))
+			input(type="hidden" name=k value=v)
+		button.outline.action
+			block
+
+
+- const notifications = getNotifications();
+
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(name="theme-color" content="#002")
+		title
+			block title
+				| DlUlU
+		link(rel="stylesheet" href="/index.css")
+		link(rel="stylesheet" href=BASEURL + "assets/index.css")
+	body
+		include _icon-defs.svg
+
+		if notifications.length > 0
+			aside.notifications(aria-label="Notifications")
+				- for (const i of notifications)
+					+notification(i)
+
+		main
+			block main
+
+		footer
+			p Fuck the bigots, yo.
+			p Made with disdain.
+			p Best experienced with NetScape Navigator, or not at all.

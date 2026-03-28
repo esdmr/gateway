@@ -1,0 +1,50 @@
+extends _layout.pug
+
+block main
+	h1 DlUlU (Download/Upload Utility)
+
+	h2 Download
+
+	ul
+		each i in dls
+			li
+				a(href=`dl/${encodeURIComponent(i.name)}?key=${accessKey}`)= i.name
+				|
+				| (
+				= formatSize(i.size)
+				| )
+
+
+	form(action=`ul?key=${accessKey}&_csrf=${_csrf}` method="post" enctype="multipart/form-data")
+		h2 Upload
+		+field("File name")
+			input(
+				name="name"
+				autocomplete="off"
+				autocorrect="off"
+				autocapitalize="off"
+				pattern="[a-zA-Z0-9_.\\-]+"
+				required
+				maxlength="256"
+			)
+		+field("File")
+			input(
+				type="file"
+				name="body"
+				autocomplete="off"
+				required
+			)
+		button.outline Submit
+
+	if admin
+		h2 Admin
+		+action(`admin/refresh?key\x3d${accessKey}`)
+			| Refresh download list
+	else
+		details.admin
+			summary Admin
+			form(action=`login?key=${accessKey}` method="post")
+				+csrf
+				+field("Key")
+					input(name="key" type="password" autocomplete="current-password" required)
+				button.outline Login

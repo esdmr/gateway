@@ -1,0 +1,120 @@
+.icon-defs {
+  display: none;
+}
+
+.notifications {
+  --bg: #ffc;
+  --fg: #002;
+}
+
+.notification {
+  padding: 2ch;
+  border-bottom: 2px solid var(--fg);
+  position: relative;
+}
+
+.notification p {
+  --fg: inherit;
+  margin: 0;
+  margin-right: 24px;
+}
+
+.notification_close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  position: absolute;
+  top: 2ch;
+  right: 2ch;
+}
+
+.notification_close:focus-within {
+  outline: 2px solid var(--fg);
+  border-radius: 2px;
+}
+
+.notification_state {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  clip-path: rect(1px 1px 1px 1px);
+}
+
+.notification:has(:checked) {
+  display: none;
+}
+
+label {
+  margin-block: 2ch;
+}
+
+.outline {
+  --bg: transparent;
+
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid var(--fg);
+  border-radius: 45px;
+  padding: 10px 45px;
+
+  cursor: pointer;
+}
+
+.outline:hover,
+.outline:focus-visible {
+  --bg: #223;
+  outline-offset: 1px;
+}
+
+.outline:active {
+  --bg: #445;
+}
+
+.action {
+  padding: 10px;
+  font-weight: normal;
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.\:3 {
+  vertical-align: 0.85px;
+}
+
+.admin {
+  margin-top: 32px;
+  display: inline-block;
+}
+
+.wanted-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wanted {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 32ch;
+}
+
+:link,
+:visited {
+  color: #faa;
+}

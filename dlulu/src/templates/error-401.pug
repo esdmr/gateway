@@ -1,0 +1,18 @@
+extends _layout.pug
+
+block title
+	| Unauthorized | DlUlU
+
+block main
+	h1 Parmesan Denied
+
+	if typeof withAccessToken === 'boolean' && withAccessToken
+		p You aren’t logged in.
+		a(href=homepage) Go back.
+	else
+		p You haven’t provided an access key.
+
+		form(action=homepage)
+			+field("Key")
+				input(type="password" name="key" required autocomplete="section-dlulu current-password")
+			button Submit

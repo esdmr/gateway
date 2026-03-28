@@ -33,7 +33,7 @@ bots:
     expression:
       all:
       - >
-        (  
+        (
           userAgent.startsWith("git/") ||
           userAgent.startsWith("git-lfs/") ||
           userAgent.contains("libgit") ||
@@ -60,6 +60,19 @@ bots:
         - '"Accept" in headers'
         - 'headers["Accept"] == "application/json"'
         - path.startsWith("/git/api/")
+
+  # Dlulu dl Route
+  - name: dlulu-allow-dl-route
+    action: ALLOW
+    expression:
+      all:
+        - >
+          (
+            userAgent.startsWith("curl/") ||
+            userAgent.startsWith("Wget/") ||
+            userAgent.startsWith("aria2/")
+          )
+        - path.startsWith("/dlulu/dl/")
 
   # Generic catchall rule
   - name: generic-browser

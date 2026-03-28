@@ -110,23 +110,36 @@ services:
     build:
       context: dlulu
     environment:
-      SECKEY_FILE: /home/bun/seckey
+      UL_DIR: /data/ul
+      DL_DIR: /data/dl
+      SECKEY_FILE: /data/seckey
+      ACCESSKEY_FILE: /data/accesskey
+      ADMINKEY_FILE: /data/adminkey
       BASEURL: /dlulu
     expose:
       - 9075
+    user: "1000"
     networks:
       gateway-public:
     volumes:
       - type: bind
         source: dlulu/ul
-        target: /home/bun/app/ul
+        target: /data/ul
       - type: bind
         source: dlulu/dl
-        target: /home/bun/app/dl
+        target: /data/dl
         read_only: true
       - type: bind
-        source: dlulu.key.txt
-        target: /home/bun/seckey
+        source: dlulu-sec.key.txt
+        target: /data/seckey
+        read_only: true
+      - type: bind
+        source: dlulu-access.key.txt
+        target: /data/accesskey
+        read_only: true
+      - type: bind
+        source: dlulu-admin.key.txt
+        target: /data/adminkey
         read_only: true
 
   bored:

@@ -2,6 +2,26 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/koa": "^3.0.2",
+    "@types/koa__multer": "^2.0.8",
+    "@types/koa__router": "^12.0.5"
+  },
+  "dependencies": {
+    "@koa/access-log": "^1.0.0",
+    "@koa/bodyparser": "^6.1.0",
+    "@koa/multer": "^4.0.0",
+    "@koa/router": "^15.4.0",
+    "@koa/send": "^6.0.0",
+    "@types/http-errors": "^2.0.5",
+    "@types/node": "^24.12.0",
+    "@types/resolve-path": "^1.4.3",
+    "http-errors": "^2.0.1",
+    "koa": "^3.1.2",
+    "koa-csrf": "^5.0.1",
+    "koa-helmet": "^9.0.0",
+    "koa-pug": "^5.1.1",
+    "koa-session-jwt": "^0.1.1",
+    "resolve-path": "^1.4.0"
   }
 }
