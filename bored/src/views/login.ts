@@ -20,5 +20,6 @@ export default new Router().post("/", async (ctx) => {
   }
 
   ctx.session.admin = true;
-  ctx.redirect(ctx.BASEURL);
+  ctx.sendNotification("You’ve logged in.");
+  ctx.back(ctx.BASEURL);
 });

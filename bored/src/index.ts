@@ -41,7 +41,7 @@ if (!adminKey) throw new Error("Missing admin key");
 
 const adminKeyBuffer = Buffer.from(adminKey);
 
-const app = new Koa();
+const app = new Koa({ proxy: !DEV, proxyIpHeader: "x-real-ip" });
 
 new KoaPug.default({
   viewPath: fileURLToPath(new URL("templates", import.meta.url)),
@@ -136,25 +136,22 @@ app
   .use(async (ctx) => {
     if (ctx.routeMatched) return;
 
-    let matched = DEV;
-
-    if (matched) {
+    if (DEV) {
       try {
         await send(ctx, ctx.path, {
           root: fileURLToPath(new URL("../../public", import.meta.url)),
           gzip: false,
           brotli: false,
         });
-      } catch (error) {
-        matched = false;
+
+        return;
+      } catch {
+        // Fallthrough.
       }
     }
 
-    if (!matched) {
-      ctx.status = 404;
-      await ctx.render("error-404.pug");
-      return;
-    }
+    ctx.status = 404;
+    await ctx.render("error-404.pug");
   })
   .listen(8510)
   .on("listening", () => {

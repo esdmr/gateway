@@ -32,5 +32,5 @@ export default new Router().post("/", async (ctx) => {
       ? "Successfully drafted a message. It will be shown after a moderator approves it."
       : "You aren’t allowed to draft messages. Please go away.",
   );
-  ctx.redirect(ctx.BASEURL);
+  ctx.back(ctx.BASEURL);
 });
