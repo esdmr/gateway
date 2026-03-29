@@ -51,10 +51,17 @@ services:
       POLICY_FNAME: /data/cfg/botPolicy.yaml
       OG_PASSTHROUGH: "true"
       OG_EXPIRY_TIME: 24h
+      COOKIE_DOMAIN: esdmr.iddns.ir
+      REDIRECT_DOMAINS: esdmr.iddns.ir:12345
+      ED25519_PRIVATE_KEY_HEX_FILE: /data/anubis.key.txt
     volumes:
       - type: bind
         source: anubis
         target: /data/cfg
+        read_only: true
+      - type: bind
+        source: anubis.key.txt
+        target: /data/anubis.key.txt
         read_only: true
     expose:
       - 8923
