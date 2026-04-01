@@ -1,7 +1,9 @@
 #!/usr/bin/env fish
-pushd dnslab
-./update.sh || echo Setting dnslab failed.
-popd
+if not contains -- no-ddns $argv
+    pushd dnslab
+    ./update.sh || echo Setting dnslab failed.
+    popd
+end
 ./dlink.update-name.sh || echo Updating name failed.
 pushd tls/server
 ./generate.sh || echo Generating TLS cert failed.
