@@ -123,6 +123,7 @@ services:
       ACCESSKEY_FILE: /data/accesskey
       ADMINKEY_FILE: /data/adminkey
       BASEURL: /dlulu
+    restart: unless-stopped
     expose:
       - 9075
     user: "1000"
@@ -157,6 +158,7 @@ services:
       ADMINKEY_FILE: /data/adminkey
       BASEURL: /bored
       DB_PATH: /data/bored.db
+    restart: unless-stopped
     expose:
       - 8510
     networks:
