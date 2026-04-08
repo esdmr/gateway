@@ -1,3 +1,9 @@
+@font-face {
+  font-family: Departure Mono;
+  src: url(/DepartureMono-Regular.ttf) format(truetype);
+  font-display: swap;
+}
+
 body {
   --bg: #002;
   --fg: #ffc;
